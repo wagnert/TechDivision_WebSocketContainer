@@ -1,0 +1,14 @@
+{
+    "name": "techdivision/websocketcontainer",
+    "type": "package",
+    "description": "Container to provide html5 websocket capability for the applicationserver.",
+    "homepage": "https://github.com/techdivision/TechDivision_WebSocketContainer",
+    "license": ["OSL-3.0"],
+    "require": {
+        "php" : ">=5.4.0",
+        "anothertestaccount/phpwebsocketbasic": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {"TechDivision": "src/"}
+    }
+}
