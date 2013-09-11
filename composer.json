@@ -1,12 +1,23 @@
 {
-    "name": "techdivision/websocketcontainer",
+    "name": "techdivision/appserver",
     "type": "package",
-    "description": "Container to provide html5 websocket capability for the applicationserver.",
-    "homepage": "https://github.com/techdivision/TechDivision_WebSocketContainer",
+    "description": "Thread based PHP daemon to implement stuff like message queues.",
+    "homepage": "https://github.com/techdivision/TechDivision_ApplicationServer",
     "license": ["OSL-3.0"],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/techdivision/TechDivision_ApplicationServer"
+        }
+    ],
     "require": {
         "php" : ">=5.4.0",
-        "anothertestaccount/phpwebsocketbasic": "dev-master"
+        "monolog/monolog": "*",
+        "herrera-io/annotations": "1.0.*"
+    },
+    "require-dev": {
+        "techdivision/socket": "dev-master",
+        "techdivision/stream": "dev-master"
     },
     "autoload": {
         "psr-0": {"TechDivision": "src/"}
