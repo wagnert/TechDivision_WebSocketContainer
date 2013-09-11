@@ -1,21 +1,19 @@
 {
-    "name": "techdivision/appserver",
-    "type": "package",
-    "description": "Thread based PHP daemon to implement stuff like message queues.",
-    "homepage": "https://github.com/techdivision/TechDivision_ApplicationServer",
+    "name": "techdivision/websocketcontainer",
+    "description": "Web socket container implementation that serves web socket requests for thread based PHP ApplicationServer.",
+    "homepage": "https://github.com/techdivision/TechDivision_WebSocketContainer",
     "license": ["OSL-3.0"],
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/techdivision/TechDivision_ApplicationServer"
+            "url": "https://github.com/techdivision/TechDivision_WebSocketContainer"
         }
     ],
     "require": {
-        "php" : ">=5.4.0",
-        "monolog/monolog": "*",
-        "herrera-io/annotations": "1.0.*"
+        "php" : ">=5.4.0"
     },
     "require-dev": {
+        "techdivision/appserver": "dev-master",
         "techdivision/socket": "dev-master",
         "techdivision/stream": "dev-master"
     },
