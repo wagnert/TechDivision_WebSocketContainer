@@ -11,7 +11,7 @@
  */
 namespace TechDivision\WebSocketContainer\Stream;
 
-use TechDivision\WebSocketContainer\AbstractRequest;
+use TechDivision\ServletContainer\AbstractRequest;
 
 /**
  * The request implementation.

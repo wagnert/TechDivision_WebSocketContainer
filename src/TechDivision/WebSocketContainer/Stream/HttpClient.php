@@ -83,6 +83,8 @@ class HttpClient extends Client implements HttpClientInterface
     public function receive()
     {
         
+        error_log(__METHOD__ . ':' . __LINE__);
+        
         // initialize the buffer
         $buffer = null;
         
