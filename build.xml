@@ -126,8 +126,8 @@
     	<!-- copy the composer configuration file to the target directory -->
     	<copy file="${basedir}/composer.json" todir="${php-target.dir}" />
         <!-- install composer packages -->
-        <exec dir="${php-target.dir}" executable="composer">
-            <env key="PATH" value="${instance.base.dir}/bin:${env.PATH}"/>
+        <exec dir="${php-target.dir}" executable="composer" searchpath="true">
+            <env key="Path" path="${instance.base.dir}/bin:${env.Path}"/>
             <arg line="update"/>
         </exec>
     </target>
