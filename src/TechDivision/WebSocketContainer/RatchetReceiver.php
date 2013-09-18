@@ -43,14 +43,18 @@ class RatchetReceiver extends AbstractReceiver
     public function start()
     {
 
-        // create a custom ratchet worker instance
-        $workerInstance = $this->newInstance($this->getWorkerType(), array(
+        // create a custom ratchet request instance
+        $requestInstance = $this->newInstance($this->getThreadType(), array(
             $this->getContainer()
                 ->getApplications()
         ));
 
-        // start the ratchet server
-        $server = IoServer::factory($workerInstance, $this->getPort(), $this->getAddress());
-        $server->run();
+        // initialize and start the ratchet worker instance
+        $workerInstance = $this->newInstance($this->getWorkerType(), array(
+            $requestInstance,
+            $this->getPort(),
+            $this->getAddress()
+        ));
+        $workerInstance->run();
     }
 }

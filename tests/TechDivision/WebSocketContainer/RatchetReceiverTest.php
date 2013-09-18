@@ -54,7 +54,7 @@ class RatchetReceiverTest extends AbstractTest
 	public function setUp()
 	{
 	    $configuration = new Configuration();
-	    $configuration->initFromFile(__DIR__ . '/_files/appserver_initial_context.xml');
+	    $configuration->initFromFile('_files/appserver_initial_context.xml');
 	    $this->initialContext = new InitialContext($configuration);
 	    $this->container = new MockContainer($this->initialContext, $this->getContainerConfiguration(), $this->getMockApplications());
 	    $this->receiver = new RatchetReceiver($this->initialContext, $this->container);
@@ -67,6 +67,7 @@ class RatchetReceiverTest extends AbstractTest
      */
     public function testStart()
     {
-
+        $this->receiver->start();
+        $this->assertInstanceOf('TechDivision\WebSocketContainer\RatchetRequest', $this->receiver->app);
     }
 }
