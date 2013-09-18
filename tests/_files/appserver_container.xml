@@ -1,0 +1,26 @@
+<container threadType="TechDivision\ApplicationServer\MockContainerThread"
+    type="TechDivision\ApplicationServer\MockContainer">
+    <description><![CDATA[This is an example of a web socket container that handles web socket requests/responses.]]></description>
+    <receiver type="TechDivision\WebSocketContainer\RatchetReceiver">
+        <worker type="TechDivision\WebSocketContainer\Mock\MockRatchetWorker"/>
+        <thread type="TechDivision\WebSocketContainer\RatchetRequest" />
+        <params>
+            <param name="workerNumber" type="integer">16</param>
+            <param name="address" type="string">0.0.0.0</param>
+            <param name="port" type="integer">8589</param>
+        </params>
+    </receiver>
+    <deployment type="TechDivision\ApplicationServer\MockDeployment" />
+    <host name="localhost" appBase="/webapps" serverAdmin="${appserver.admin.email}"
+        serverSoftware="appserver/${appserver.version} (${os.family}) PHP/${appserver.php.version}">
+        <vhosts>
+            <vhost name="www.appserver.io" appBase="/site">
+                <aliases>
+                    <alias>appserver.io</alias>
+                    <alias>appserver.local</alias>
+                </aliases>
+            </vhost>
+            <vhost name="neos.local" appBase="/neos" />
+        </vhosts>
+    </host>
+</container>

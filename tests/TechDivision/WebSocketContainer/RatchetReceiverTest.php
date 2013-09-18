@@ -15,7 +15,7 @@ use TechDivision\ApplicationServer\AbstractTest;
 use TechDivision\ApplicationServer\Configuration;
 use TechDivision\ApplicationServer\InitialContext;
 use TechDivision\ApplicationServer\Mock\MockContainer;
-use TechDivision\ApplicationServer\Mock\MockReceiver;
+use TechDivision\WebSocketContainer\Mock\MockRatchetReceiver;
 
 /**
  *
@@ -54,11 +54,21 @@ class RatchetReceiverTest extends AbstractTest
 	public function setUp()
 	{
 	    $configuration = new Configuration();
-	    $configuration->initFromFile(__DIR__ . '/_files/appserver_initial_context.xml');
+	    $configuration->initFromFile('_files/appserver_initial_context.xml');
 	    $this->initialContext = new InitialContext($configuration);
 	    $this->container = new MockContainer($this->initialContext, $this->getContainerConfiguration(), $this->getMockApplications());
-	    $this->receiver = new RatchetReceiver($this->initialContext, $this->container);
+	    $this->receiver = new MockRatchetReceiver($this->initialContext, $this->container);
 	}
+
+    /**
+     * Test if the resource class is empty, because ratchet uses his own.
+     *
+     * @return void
+     */
+    public function testGetResourceClass()
+    {
+        $this->assertEmpty($this->receiver->getResourceClass());
+    }
 
     /**
      * Test receivers start method.
@@ -67,6 +77,6 @@ class RatchetReceiverTest extends AbstractTest
      */
     public function testStart()
     {
-
+        $this->assertNull($this->receiver->start());
     }
 }
