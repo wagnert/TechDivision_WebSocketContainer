@@ -16,6 +16,7 @@ use TechDivision\ApplicationServer\AbstractApplication;
 use TechDivision\WebSocketContainer\HandlerManager;
 use TechDivision\WebSocketContainer\Service\Locator\HandlerLocator;
 use TechDivision\ApplicationServer\Configuration;
+use TechDivision\ApplicationServer\Vhost;
 
 /**
  * The application instance holds all information about the deployed application
@@ -29,20 +30,6 @@ use TechDivision\ApplicationServer\Configuration;
  */
 class Application extends AbstractApplication
 {
-
-    /**
-     * Path to the container's VHost configuration.
-     *
-     * @var string
-     */
-    const XPATH_CONTAINER_VHOSTS = '/container/host/vhosts/vhost';
-
-    /**
-     * Path to the container's VHost alias configuration.
-     *
-     * @var string
-     */
-    const XPATH_CONTAINER_ALIAS = '/vhost/aliases/alias';
 
     /**
      * The handler manager.
@@ -72,19 +59,19 @@ class Application extends AbstractApplication
         set_include_path(get_include_path() . PATH_SEPARATOR . $this->getWebappPath() . DIRECTORY_SEPARATOR . 'WEB-INF' . DIRECTORY_SEPARATOR . 'lib');
 
         // prepare the VHost configurations
-        foreach ($this->getConfiguration()->getChilds(self::XPATH_CONTAINER_VHOSTS) as $vhost) {
+        foreach ($this->getConfiguration()->getChilds(Vhost::XPATH_CONTAINER_VHOSTS) as $vhost) {
 
             // check if vhost configuration belongs to application
             if ($this->getName() == ltrim($vhost->getAppBase(), '/')) {
 
                 // prepare the aliases if available
                 $aliases = array();
-                foreach ($vhost->getChilds(self::XPATH_CONTAINER_ALIAS) as $alias) {
+                foreach ($vhost->getChilds(Vhost::XPATH_CONTAINER_ALIAS) as $alias) {
                     $aliases[] = $alias->getValue();
                 }
 
                 // initialize VHost classname and parameters
-                $vhostClassname = '\TechDivision\WebSocketContainer\Vhost';
+                $vhostClassname = '\TechDivision\ApplicationServer\Vhost';
                 $vhostParameter = array(
                     $vhost->getName(),
                     $vhost->getAppBase(),
@@ -117,7 +104,7 @@ class Application extends AbstractApplication
     public function getServerSoftware()
     {
         return $this->getConfiguration()
-            ->getChild(self::XPATH_CONTAINER_HOST)
+            ->getChild(Vhost::XPATH_CONTAINER_HOST)
             ->getServerSoftware();
     }
 
@@ -129,7 +116,7 @@ class Application extends AbstractApplication
     public function getServerAdmin()
     {
         return $this->getConfiguration()
-            ->getChild(self::XPATH_CONTAINER_HOST)
+            ->getChild(Vhost::XPATH_CONTAINER_HOST)
             ->getServerAdmin();
     }
 
