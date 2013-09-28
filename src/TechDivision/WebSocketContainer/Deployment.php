@@ -32,16 +32,14 @@ class Deployment extends AbstractDeployment
     public function deploy()
     {
 
-        // the container configuration
-        $containerThread = $this->getContainerThread();
-        $configuration = $containerThread->getConfiguration();
+        // initialize the container service
+        $containerService = $this->newService('TechDivision\ApplicationServer\Api\ContainerService');
 
         // load the host configuration for the path to the web application folder
-        $baseDirectory = $configuration->getChild(self::XPATH_CONTAINER_BASE_DIRECTORY)->getValue();
-        $appBase = $configuration->getChild(self::XPATH_CONTAINER_HOST)->getAppBase();
+        $appBase = $containerService->getAppBase($this->getId());
 
         // gather all the deployed web applications
-        foreach (new \FilesystemIterator($baseDirectory . $appBase) as $folder) {
+        foreach (new \FilesystemIterator($appBase) as $folder) {
 
             // check if file or subdirectory has been found
             if (is_dir($folder)) {
@@ -50,14 +48,13 @@ class Deployment extends AbstractDeployment
                 $name = basename($folder);
 
                 // initialize the application instance
-                $application = $containerThread->newInstance('\TechDivision\WebSocketContainer\Application', array(
+                $application = $this->newInstance('\TechDivision\WebSocketContainer\Application', array(
                     $this->initialContext,
                     $name
                 ));
-                $application->setConfiguration($configuration);
 
                 // add the application to the available applications
-                $this->applications[$application->getName()] = $application->connect();
+                $this->addApplication($application);
             }
         }
 

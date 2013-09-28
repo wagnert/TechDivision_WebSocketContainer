@@ -39,12 +39,6 @@ class Application extends AbstractApplication
     protected $handlerManager;
 
     /**
-     * Array with available VHost configurations.
-     * @array
-     */
-    protected $vhosts = array();
-
-    /**
      * Has been automatically invoked by the container after the application
      * instance has been created.
      *
@@ -53,35 +47,13 @@ class Application extends AbstractApplication
     public function connect()
     {
 
+        // also initialize the vhost configuration
+        parent::connect();
+
         // initialize the class loader with the additional folders
         set_include_path(get_include_path() . PATH_SEPARATOR . $this->getWebappPath());
         set_include_path(get_include_path() . PATH_SEPARATOR . $this->getWebappPath() . DIRECTORY_SEPARATOR . 'WEB-INF' . DIRECTORY_SEPARATOR . 'classes');
         set_include_path(get_include_path() . PATH_SEPARATOR . $this->getWebappPath() . DIRECTORY_SEPARATOR . 'WEB-INF' . DIRECTORY_SEPARATOR . 'lib');
-
-        // prepare the VHost configurations
-        foreach ($this->getConfiguration()->getChilds(Vhost::XPATH_CONTAINER_VHOSTS) as $vhost) {
-
-            // check if vhost configuration belongs to application
-            if ($this->getName() == ltrim($vhost->getAppBase(), '/')) {
-
-                // prepare the aliases if available
-                $aliases = array();
-                foreach ($vhost->getChilds(Vhost::XPATH_CONTAINER_ALIAS) as $alias) {
-                    $aliases[] = $alias->getValue();
-                }
-
-                // initialize VHost classname and parameters
-                $vhostClassname = '\TechDivision\ApplicationServer\Vhost';
-                $vhostParameter = array(
-                    $vhost->getName(),
-                    $vhost->getAppBase(),
-                    $aliases
-                );
-
-                // register VHost in array with app base folder
-                $this->vhosts[] = $this->newInstance($vhostClassname, $vhostParameter);
-            }
-        }
 
         // initialize the handler manager instance
         $handlerManager = $this->newInstance('TechDivision\WebSocketContainer\HandlerManager', array(
@@ -94,30 +66,6 @@ class Application extends AbstractApplication
 
         // return the instance itself
         return $this;
-    }
-
-    /**
-     * Return's the server software.
-     *
-     * @return string The server software
-     */
-    public function getServerSoftware()
-    {
-        return $this->getConfiguration()
-            ->getChild(Vhost::XPATH_CONTAINER_HOST)
-            ->getServerSoftware();
-    }
-
-    /**
-     * Return's the server admin email.
-     *
-     * @return string The server admin email
-     */
-    public function getServerAdmin()
-    {
-        return $this->getConfiguration()
-            ->getChild(Vhost::XPATH_CONTAINER_HOST)
-            ->getServerAdmin();
     }
 
     /**
@@ -141,42 +89,6 @@ class Application extends AbstractApplication
     public function getHandlerManager()
     {
         return $this->handlerManager;
-    }
-
-    /**
-     * Return's the applications available VHost configurations.
-     *
-     * @return array The available VHost configurations
-     */
-    public function getVhosts()
-    {
-        return $this->vhosts;
-    }
-
-    /**
-     * Checks if the application is the VHost for the passed server name.
-     *
-     * @param string $serverName
-     *            The server name to check the application being a VHost of
-     * @return boolean TRUE if the application is the VHost, else FALSE
-     */
-    public function isVhostOf($serverName)
-    {
-
-        // check if the application is VHost for the passed server name
-        foreach ($this->getVhosts() as $vhost) {
-
-            // compare the VHost name itself
-            if (strcmp($vhost->getName(), $serverName) === 0) {
-                return true;
-            }
-
-            // then compare all aliases
-            if (in_array($serverName, $vhost->getAliases())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
