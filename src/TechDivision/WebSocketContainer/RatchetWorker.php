@@ -55,7 +55,7 @@ class RatchetWorker extends IoServer
         ob_implicit_flush();
 
         // add event
-        $socket->on('connection', array($this, 'handleConnect'));
+        $this->socket->on('connection', array($this, 'handleConnect'));
 
         // initialize handlers
         $this->handlers = new \SplFixedArray(3);
