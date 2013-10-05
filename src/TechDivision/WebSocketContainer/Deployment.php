@@ -35,7 +35,7 @@ class Deployment extends AbstractDeployment
         // gather all the deployed web applications
         foreach (new \FilesystemIterator($this->getBaseDirectory($this->getAppBase())) as $folder) {
 
-            // check if file or subdirectory has been found
+            // check if file or sub directory has been found
             if (is_dir($folder)) {
 
                 // initialize the application name
