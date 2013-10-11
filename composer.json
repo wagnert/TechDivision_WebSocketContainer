@@ -11,9 +11,9 @@
     ],
     "require": {
         "php" : ">=5.4.0",
-        "techdivision/socket": "dev-master",
-        "techdivision/stream": "dev-master",
-        "techdivision/appserver": "dev-master",
+        "techdivision/socket": "~0.5.8@beta",
+        "techdivision/stream": "~0.5.8@beta",
+        "techdivision/appserver": "~0.5.8@beta",
         "cboden/Ratchet": "0.2.*"
     },
     "autoload": {
