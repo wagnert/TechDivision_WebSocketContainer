@@ -202,7 +202,7 @@ class RatchetRequest implements MessageComponentInterface
      * @param \Guzzle\Http\Message\RequestInterface $request
      *            The request to find and return the application instance for
      * @return \TechDivision\WebSocketContainer\Application The application instance
-     * @throws \TechDivision\WebSocketContainer\Exceptions\BadRequestException Is thrown if no application can be found for the passed application name
+     * @throws \TechDivision\WebSocketContainer\BadRequestException Is thrown if no application can be found for the passed application name
      */
     public function findApplication(RequestInterface $request)
     {

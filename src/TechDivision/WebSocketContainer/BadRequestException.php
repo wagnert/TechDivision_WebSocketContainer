@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\WebSocketContainer\Exceptions\BadRequestException
+ * TechDivision\WebSocketContainer\BadRequestException
  *
  * NOTICE OF LICENSE
  *
@@ -9,7 +9,7 @@
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
  */
-namespace TechDivision\WebSocketContainer\Exceptions;
+namespace TechDivision\WebSocketContainer;
 
 /**
  * Is thrown if no application can be found for the passed application name.
