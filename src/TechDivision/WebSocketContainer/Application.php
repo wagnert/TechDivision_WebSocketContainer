@@ -12,11 +12,11 @@
 namespace TechDivision\WebSocketContainer;
 
 use Guzzle\Http\Message\RequestInterface;
-use TechDivision\ApplicationServer\AbstractApplication;
-use TechDivision\WebSocketContainer\HandlerManager;
-use TechDivision\WebSocketContainer\Service\Locator\HandlerLocator;
-use TechDivision\ApplicationServer\Configuration;
 use TechDivision\ApplicationServer\Vhost;
+use TechDivision\ApplicationServer\Configuration;
+use TechDivision\ApplicationServer\AbstractApplication;
+use TechDivision\WebSocketContainer\Handlers\HandlerManager;
+use TechDivision\WebSocketContainer\Service\Locator\HandlerLocator;
 
 /**
  * The application instance holds all information about the deployed application
@@ -34,7 +34,7 @@ class Application extends AbstractApplication
     /**
      * The handler manager.
      *
-     * @var \TechDivision\WebSocketContainer\HandlerManager
+     * @var \TechDivision\WebSocketContainer\Handlers\HandlerManager
      */
     protected $handlerManager;
 
@@ -56,7 +56,7 @@ class Application extends AbstractApplication
         set_include_path(get_include_path() . PATH_SEPARATOR . $this->getWebappPath() . DIRECTORY_SEPARATOR . 'WEB-INF' . DIRECTORY_SEPARATOR . 'lib');
 
         // initialize the handler manager instance
-        $handlerManager = $this->newInstance('TechDivision\WebSocketContainer\HandlerManager', array(
+        $handlerManager = $this->newInstance('TechDivision\WebSocketContainer\Handlers\HandlerManager', array(
             $this
         ));
         $handlerManager->initialize();
@@ -71,7 +71,7 @@ class Application extends AbstractApplication
     /**
      * Sets the applications handler manager instance.
      *
-     * @param \TechDivision\WebSocketContainer\HandlerManager $handlerManager
+     * @param \TechDivision\WebSocketContainer\Handlers\HandlerManager $handlerManager
      *            The handler manager instance
      * @return \TechDivision\WebSocketContainer\Application The application instance
      */

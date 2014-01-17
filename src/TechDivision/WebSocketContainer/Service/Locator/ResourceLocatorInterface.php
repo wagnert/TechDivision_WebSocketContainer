@@ -26,11 +26,12 @@ interface ResourceLocatorInterface
 {
 
     /**
-     * Tries to locate the handler that handles the request and returns the instance if one can be found.
+     * Tries to locate the handler that handles the request and returns the instance if 
+     * one can be found.
      *
      * @param \Guzzle\Http\Message\RequestInterface $request
      *            The request instance
-     * @return \Ratchet\MessageComponentInterface The handler that maps the request instance
+     * @return \TechDivision\WebSocketContainer\Handlers\Handler The handler that maps the request instance
      */
     public function locate(RequestInterface $request);
 }

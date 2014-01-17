@@ -11,7 +11,6 @@
  */
 namespace TechDivision\WebSocketContainer\Service\Locator;
 
-use TechDivision\WebSocketContainer\Service\Locator\ResourceLocatorInterface;
 use Guzzle\Http\Message\RequestInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
@@ -37,6 +36,13 @@ class HandlerLocator implements ResourceLocatorInterface
      * @var \TechDivision\WebSocketContainer\HandlerManager
      */
     protected $handlerManager;
+
+    /**
+     * The collection with the initialized routes.
+     *
+     * @var \Symfony\Component\Routing\RouteCollection
+     */
+    protected $routes;
 
     /**
      * Initializes the locator with the actual handler manager instance.
@@ -76,29 +82,38 @@ class HandlerLocator implements ResourceLocatorInterface
      *
      * @return \Symfony\Component\Routing\RouteCollection The collection with the available routes
      */
-    public function getRouteCollection()
+    public function initRoutes()
     {
-
+        
         // retrieve the registered handlers
-        $handlers = $this->handlerManager->getHandler();
-
+        $handlerMappings = $this->getHandlerManager()->getHandlerMappings();
+        $handlers = $this->getHandlerManager()->getHandlers();
+        
         // prepare the collection with the available routes and initialize the route counter
-        $routes = new RouteCollection();
+        $this->routes = new RouteCollection();
         $counter = 0;
-
+        
         // iterate over the available handlers and prepare the routes
-        foreach ($handlers as $urlPattern => $handler) {
+        foreach ($handlerMappings as $urlPattern => $handlerName) {
+            $handler = $handlers[$handlerName];
             $pattern = str_replace('/*', "/{placeholder_$counter}", $urlPattern);
             $route = new Route($pattern, array(
                 $handler
             ), array(
                 "{placeholder_$counter}" => '.*'
             ));
-            $routes->add($counter ++, $route);
+            $this->routes->add($counter ++, $route);
         }
+    }
 
-        // return the collection with the routes
-        return $routes;
+    /**
+     * Returns the collection with the initialized routes.
+     *
+     * @return \Symfony\Component\Routing\RouteCollection The initialize routes
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
     }
 
     /**
@@ -118,7 +133,7 @@ class HandlerLocator implements ResourceLocatorInterface
         }
 
         // load the route collection
-        $routes = $this->getRouteCollection();
+        $routes = $this->getRoutes();
 
         // initialize the context for the routing
         $context = new RequestContext($path, $request->getMethod(), $request->getHost());
@@ -135,9 +150,15 @@ class HandlerLocator implements ResourceLocatorInterface
             } catch (ResourceNotFoundException $rnfe) {
                 $path = substr($path, 0, strrpos($path, '/'));
             }
+            
         } while (strpos($path, '/') !== FALSE);
-
-        // return the handler instance
+        
+        // check at least one handler has been found
+        if (is_array($handler) === false || sizeof($handler) === 0) {
+            throw new HandlerNotFoundException("Can't find handler for requested path $path");
+        }
+        
+        // load and return the the handler instance from the matching result
         return current($handler);
     }
 }
