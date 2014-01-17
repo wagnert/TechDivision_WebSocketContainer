@@ -54,6 +54,7 @@ class HandlerLocator implements ResourceLocatorInterface
     public function __construct($handlerManager)
     {
         $this->handlerManager = $handlerManager;
+        $this->initRoutes();
     }
 
     /**

@@ -35,7 +35,7 @@ class HandlerManager
      * 
      * @var array
      */
-    protected $handler = array();
+    protected $handlers = array();
     
     /**
      * Array that contains the handler mappings
@@ -108,7 +108,7 @@ class HandlerManager
     
                 // load the handler name and check if it already has been initialized
                 $handlerName = (string) $handler->{'handler-name'};
-                if (array_key_exists($handlerName, $this->handler)) {
+                if (array_key_exists($handlerName, $this->handlers)) {
                     continue;
                 }
     
@@ -171,9 +171,9 @@ class HandlerManager
      * 
      * @param array $handler An array with the web socket handlers to be registered
      */
-    public function setHandler($handler)
+    public function setHandlers($handler)
     {
-        $this->handler = $handler;
+        $this->handlers = $handler;
     }
 
     /**
@@ -181,9 +181,9 @@ class HandlerManager
      * 
      * @return array An array with the initialized web socket handlers
      */
-    public function getHandler()
+    public function getHandlers()
     {
-        return $this->handler;
+        return $this->handlers;
     }
 
     /**
@@ -196,7 +196,7 @@ class HandlerManager
      */
     public function addHandler($key, Handler $handler)
     {
-        $this->handler[$key] = $handler;
+        $this->handlers[$key] = $handler;
     }
     
     /**
@@ -219,7 +219,7 @@ class HandlerManager
     public function getHandlerByMapping($urlMapping)
     {
         if (array_key_exists($urlMapping, $this->handlerMappings)) {
-            return $this->getHandler($this->handlerMappings[$urlMapping]);
+            return $this->getHandlers($this->handlerMappings[$urlMapping]);
         }
     }
 

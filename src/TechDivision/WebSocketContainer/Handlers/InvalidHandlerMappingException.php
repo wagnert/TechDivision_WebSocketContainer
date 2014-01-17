@@ -9,7 +9,7 @@
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
  */
-namespace TechDivision\WebSocketContainer;
+namespace TechDivision\WebSocketContainer\Handlers;
 
 /**
  * Is thrown if a invalid handler mapping has been found in the 

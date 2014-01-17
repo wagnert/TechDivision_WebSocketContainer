@@ -28,7 +28,7 @@ class HandlerConfiguration implements HandlerConfig
      * 
      * @var string
      */
-    protected handlerName;
+    protected $handlerName;
 
     /**
      * The handler manager instance.
