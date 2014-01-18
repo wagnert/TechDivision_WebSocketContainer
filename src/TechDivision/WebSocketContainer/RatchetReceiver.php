@@ -55,6 +55,15 @@ class RatchetReceiver extends AbstractReceiver
             $this->getPort(),
             $this->getAddress()
         ));
+
+
+        // log a message that the container has been started successfully
+        $this->getInitialContext()->getSystemLogger()->info(
+            sprintf('Successfully started receiver for container %s, listening on IP: %s Port: %s Number of workers started: %s, Workertype: %s',
+                $this->getContainer()->getContainerNode()->getName(), $this->getAddress(), $this->getPort(),
+                $this->getWorkerNumber(), $this->getWorkerType()));
+        
+        // start the web socket server
         $workerInstance->run();
     }
 }
