@@ -97,7 +97,7 @@ class RatchetRequest implements MessageComponentInterface
      *            The initialized applications
      * @return void
      */
-    public function __construct(&$applications)
+    public function __construct($applications)
     {
         // initialize the web socket server instance
         $this->reqParser = new HttpRequestParser();
