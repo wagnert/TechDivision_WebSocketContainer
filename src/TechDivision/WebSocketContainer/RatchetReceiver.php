@@ -32,7 +32,7 @@ class RatchetReceiver extends AbstractReceiver
      */
     protected function getResourceClass()
     {
-        return '';
+        return 'TechDivision\Socket\Server';
     }
 
     /**
