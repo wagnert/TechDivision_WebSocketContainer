@@ -69,8 +69,9 @@
     <!-- Runs the code sniffer and generates a report                         -->
     <!-- ==================================================================== -->
     <target name="phpcs" description="Runs the code sniffer and generates a report.">
-        <exec executable="phpcs">
-            <arg line="--extensions=php,phtml --standard=Zend --report=checkstyle --report-file=${php-target.dir}/reports/checkstyle.xml ${php-src.dir}"/>
+        <exec executable="phpcs" failonerror="true">
+            <!-- call phpcs without report-file to get error message on build console -->
+            <arg line="-n --extensions=php --standard=phpcs.xml ."/>
         </exec>
     </target>
 	
