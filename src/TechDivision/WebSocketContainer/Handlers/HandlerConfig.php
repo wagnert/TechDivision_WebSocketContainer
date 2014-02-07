@@ -23,7 +23,7 @@ namespace TechDivision\WebSocketContainer\Handlers;
  */
 interface HandlerConfig
 {
-    
+
     /**
      * Return's the handler's name from the handler.xml configuration file.
      *
@@ -34,7 +34,7 @@ interface HandlerConfig
     /**
      * Returns the handler manager instance.
      *
-     * @return \TechDivision\WebSocketContainer\HandlerManager The handler manager instance
+     * @return \TechDivision\WebSocketContainer\Handlers\HandlerManager The handler manager instance
      */
     public function getHandlerManager();
 }

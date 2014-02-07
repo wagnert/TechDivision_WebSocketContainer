@@ -22,24 +22,24 @@ namespace TechDivision\WebSocketContainer\Handlers;
  */
 class HandlerConfiguration implements HandlerConfig
 {
-    
+
     /**
      * The handler's name from the handler.xml configuration file.
-     * 
+     *
      * @var string
      */
     protected $handlerName;
 
     /**
      * The handler manager instance.
-     * 
+     *
      * @var \TechDivision\WebSocketContainer\HandlerManager
      */
     protected $handlerManager;
-    
+
     /**
      * Array with the servlet's init parameters found in the handler.xml configuration file.
-     * 
+     *
      * @var array
      */
     protected $initParameter = array();
@@ -47,7 +47,7 @@ class HandlerConfiguration implements HandlerConfig
     /**
      * Initializes the handler configuration with the handler manager instance.
      *
-     * @param \TechDivision\WebSocketContainer\HandlerManager $handlerManager
+     * @param \TechDivision\WebSocketContainer\Handlers\HandlerManager $handlerManager
      *            The handler manager instance
      * @return void
      */
@@ -59,7 +59,7 @@ class HandlerConfiguration implements HandlerConfig
     /**
      * Returns the handler manager instance.
      *
-     * @return \TechDivision\WebSocketContainer\HandlerManager The handler manager instance
+     * @return \TechDivision\WebSocketContainer\Handlers\HandlerManager The handler manager instance
      */
     public function getHandlerManager()
     {
@@ -105,10 +105,10 @@ class HandlerConfiguration implements HandlerConfig
     {
         return $this->getApplication()->getAppBase();
     }
-    
+
     /**
      * Set's the handler's Uname from the handler.xml configuration file.
-     * 
+     *
      * @param string $handlerName The handler name
      * @return void
      */
@@ -116,20 +116,20 @@ class HandlerConfiguration implements HandlerConfig
     {
         $this->handlerName = $handlerName;
     }
-    
+
     /**
      * Return's the handler's name from the handler.xml configuration file.
-     * 
+     *
      * @return string The handler name
      */
     public function getHandlerName()
     {
         return $this->handlerName;
     }
-    
+
     /**
      * Register's the init parameter under the passed name.
-     * 
+     *
      * @param string $name Name to register the init parameter with
      * @param string $value The value of the init parameter
      */
@@ -137,10 +137,10 @@ class HandlerConfiguration implements HandlerConfig
     {
         $this->initParameter[$name] = $value;
     }
-    
+
     /**
      * Return's the init parameter with the passed name.
-     * 
+     *
      * @param string $name Name of the init parameter to return
      */
     public function getInitParameter($name)
