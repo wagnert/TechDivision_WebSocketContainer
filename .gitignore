@@ -12,5 +12,8 @@ vendor/
 # the apple directory description
 .DS_Store
 
+# phpdocumentor files
+phpdoc-*
+
 # but don't ignore this file
 !.gitignore
