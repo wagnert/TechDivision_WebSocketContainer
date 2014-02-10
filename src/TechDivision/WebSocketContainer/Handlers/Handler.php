@@ -44,14 +44,14 @@ interface Handler extends MessageComponentInterface {
 
     /**
      * Returns the servlet manager instance (context)
-     * 
-     * @return \TechDivision\WebSocketContainer\HandlerManager The handler manager instance
+     *
+     * @return \TechDivision\WebSocketContainer\Handlers\HandlerManager The handler manager instance
      */
     public function getHandlerManager();
-    
+
     /**
      * Returns the application instance.
-     * 
+     *
      * @return \TechDivision\WebSocketContainer\Application The application instance
      */
     public function getApplication();
