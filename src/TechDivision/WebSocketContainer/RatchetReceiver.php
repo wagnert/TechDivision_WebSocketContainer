@@ -56,7 +56,6 @@ class RatchetReceiver extends AbstractReceiver
             $this->getAddress()
         ));
 
-
         // log a message that the container has been started successfully
         $this->getInitialContext()->getSystemLogger()->info(
             sprintf('Successfully started receiver for container %s, listening on IP: %s Port: %s Number of workers started: %s, Workertype: %s',
