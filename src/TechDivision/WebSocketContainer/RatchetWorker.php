@@ -12,7 +12,7 @@
  * PHP version 5
  *
  * @category  Appserver
- * @package   TechDivision\WebSocketContainer
+ * @package   TechDivision_WebSocketContainer
  * @author    Tim Wagner <tw@techdivision.com>
  * @copyright 2014 TechDivision GmbH <info@techdivision.com>
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
@@ -31,7 +31,7 @@ use Ratchet\MessageComponentInterface;
  * Events are delegated through this to attached applications.
  *
  * @category  Appserver
- * @package   TechDivision\WebSocketContainer
+ * @package   TechDivision_WebSocketContainer
  * @author    Tim Wagner <tw@techdivision.com>
  * @copyright 2014 TechDivision GmbH <info@techdivision.com>
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
