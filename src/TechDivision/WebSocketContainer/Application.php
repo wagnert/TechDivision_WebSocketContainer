@@ -8,6 +8,15 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ *
+ * PHP version 5
+ *
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 namespace TechDivision\WebSocketContainer;
 
@@ -22,11 +31,12 @@ use TechDivision\WebSocketContainer\Service\Locator\HandlerLocator;
  * The application instance holds all information about the deployed application
  * and provides a reference to the web socket manager and the initial context.
  *
- * @package TechDivision\WebSocketContainer
- * @copyright Copyright (c) 2010 <info@techdivision.com> - TechDivision GmbH
- * @license http://opensource.org/licenses/osl-3.0.php
- *          Open Software License (OSL 3.0)
- * @author Tim Wagner <tw@techdivision.com>
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 class Application extends AbstractApplication
 {
@@ -71,8 +81,8 @@ class Application extends AbstractApplication
     /**
      * Sets the applications handler manager instance.
      *
-     * @param \TechDivision\WebSocketContainer\Handlers\HandlerManager $handlerManager
-     *            The handler manager instance
+     * @param \TechDivision\WebSocketContainer\Handlers\HandlerManager $handlerManager The handler manager instance
+     * 
      * @return \TechDivision\WebSocketContainer\Application The application instance
      */
     public function setHandlerManager(HandlerManager $handlerManager)
@@ -92,10 +102,11 @@ class Application extends AbstractApplication
     }
 
     /**
-     * Locates the handler for the passed request.
+     * Locates the handler for the passed request and returns it.
      *
-     * @param \Guzzle\Http\Message\RequestInterface $request
-     * @return \Ratchet\MessageComponentInterface
+     * @param \Guzzle\Http\Message\RequestInterface $request The request instance with the URI to identify the handler with
+     * 
+     * @return \Ratchet\MessageComponentInterface The handler instance
      */
     public function locate(RequestInterface $request)
     {

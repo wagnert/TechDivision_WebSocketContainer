@@ -8,6 +8,15 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ *
+ * PHP version 5
+ *
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 namespace TechDivision\WebSocketContainer;
 
@@ -15,12 +24,16 @@ use TechDivision\ApplicationServer\AbstractReceiver;
 use Ratchet\Server\IoServer;
 
 /**
- *
- * @package TechDivision\WebSocketContainer
- * @copyright Copyright (c) 2010 <info@techdivision.com> - TechDivision GmbH
- * @license http://opensource.org/licenses/osl-3.0.php
- *          Open Software License (OSL 3.0)
- * @author Tim Wagner <tw@techdivision.com>
+ * This class implements a web socket receiver based on Ratchet, a WebSocket
+ * server implementation for PHP.
+ * 
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
+ * @link      http://socketo.me
  */
 class RatchetReceiver extends AbstractReceiver
 {
@@ -36,8 +49,9 @@ class RatchetReceiver extends AbstractReceiver
     }
 
     /**
-     * (non-PHPdoc)
-     *
+     * Starts the receiver and the Ratchet server.
+     * 
+     * @return void
      * @see \TechDivision\ApplicationServer\AbstractReceiver::start()
      */
     public function start()
@@ -58,9 +72,15 @@ class RatchetReceiver extends AbstractReceiver
 
         // log a message that the container has been started successfully
         $this->getInitialContext()->getSystemLogger()->info(
-            sprintf('Successfully started receiver for container %s, listening on IP: %s Port: %s Number of workers started: %s, Workertype: %s',
-                $this->getContainer()->getContainerNode()->getName(), $this->getAddress(), $this->getPort(),
-                $this->getWorkerNumber(), $this->getWorkerType()));
+            sprintf(
+                'Successfully started receiver for container %s, listening on IP: %s Port: %s Number of workers started: %s, Workertype: %s',
+                $this->getContainer()->getContainerNode()->getName(),
+                $this->getAddress(),
+                $this->getPort(),
+                $this->getWorkerNumber(),
+                $this->getWorkerType()
+            )
+        );
         
         // start the web socket server
         $workerInstance->run();

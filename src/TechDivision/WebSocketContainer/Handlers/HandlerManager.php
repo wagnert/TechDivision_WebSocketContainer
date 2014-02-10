@@ -8,17 +8,27 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ *
+ * PHP version 5
+ *
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 namespace TechDivision\WebSocketContainer\Handlers;
 
 /**
  * The handler manager handles the handlers registered for the application.
  *
- * @package TechDivision\WebSocketContainer
- * @copyright Copyright (c) 2010 <info@techdivision.com> - TechDivision GmbH
- * @license http://opensource.org/licenses/osl-3.0.php
- *          Open Software License (OSL 3.0)
- * @author Tim Wagner <tw@techdivision.com>
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 class HandlerManager
 {
@@ -54,8 +64,8 @@ class HandlerManager
     /**
      * Set's the application instance.
      *
-     * @param \TechDivision\WebSocketContainer\Application $application
-     *            The application instance
+     * @param \TechDivision\WebSocketContainer\Application $application The application instance
+     * 
      * @return void
      */
     public function __construct($application)
@@ -169,8 +179,9 @@ class HandlerManager
     /**
      * Set's the array with all registered handlers.
      *
-     * @param array $handler
-     *            An array with the web socket handlers to be registered
+     * @param array $handler An array with the web socket handlers to be registered
+     * 
+     * @return void
      */
     public function setHandlers($handler)
     {
@@ -190,10 +201,10 @@ class HandlerManager
     /**
      * Registers a handler under the passed key.
      *
-     * @param string $key
-     *            The key to register with the handler with
-     * @param \TechDivision\WebSocketContainer\Handlers\Handler $handler
-     *            The handler to be registered
+     * @param string                                            $key     The key to register with the handler with
+     * @param \TechDivision\WebSocketContainer\Handlers\Handler $handler The handler to be registered
+     * 
+     * @return void
      */
     public function addHandler($key, Handler $handler)
     {
@@ -214,8 +225,8 @@ class HandlerManager
     /**
      * Returns the handler for the passed URL mapping.
      *
-     * @param string $urlMapping
-     *            The URL mapping to return the handler for
+     * @param string $urlMapping The URL mapping to return the handler for
+     * 
      * @return \TechDivision\WebSocktContainer\Handlers\Handler The handler instance
      */
     public function getHandlerByMapping($urlMapping)
@@ -258,10 +269,10 @@ class HandlerManager
     /**
      * Register's the init parameter under the passed name.
      *
-     * @param string $name
-     *            Name to register the init parameter with
-     * @param string $value
-     *            The value of the init parameter
+     * @param string $name  Name to register the init parameter with
+     * @param string $value The value of the init parameter
+     * 
+     * @return void
      */
     public function addInitParameter($name, $value)
     {
@@ -271,8 +282,9 @@ class HandlerManager
     /**
      * Return's the init parameter with the passed name.
      *
-     * @param string $name
-     *            Name of the init parameter to return
+     * @param string $name Name of the init parameter to return
+     * 
+     * @return string The requested parameter
      */
     public function getInitParameter($name)
     {

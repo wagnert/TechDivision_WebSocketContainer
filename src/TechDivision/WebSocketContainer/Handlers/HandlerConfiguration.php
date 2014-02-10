@@ -8,17 +8,27 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ *
+ * PHP version 5
+ *
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 namespace TechDivision\WebSocketContainer\Handlers;
 
 /**
  * Handler configuration.
  *
- * @package TechDivision\WebSocketContainer
- * @copyright Copyright (c) 2010 <info@techdivision.com> - TechDivision GmbH
- * @license http://opensource.org/licenses/osl-3.0.php
- *          Open Software License (OSL 3.0)
- * @author Tim Wagner <tw@techdivision.com>
+ * @category  Appserver
+ * @package   TechDivision\WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 class HandlerConfiguration implements HandlerConfig
 {
@@ -47,8 +57,8 @@ class HandlerConfiguration implements HandlerConfig
     /**
      * Initializes the handler configuration with the handler manager instance.
      *
-     * @param \TechDivision\WebSocketContainer\Handlers\HandlerManager $handlerManager
-     *            The handler manager instance
+     * @param \TechDivision\WebSocketContainer\Handlers\HandlerManager $handlerManager The handler manager instance
+     * 
      * @return void
      */
     public function __construct($handlerManager)
@@ -110,6 +120,7 @@ class HandlerConfiguration implements HandlerConfig
      * Set's the handler's Uname from the handler.xml configuration file.
      *
      * @param string $handlerName The handler name
+     * 
      * @return void
      */
     public function setHandlerName($handlerName)
@@ -130,8 +141,10 @@ class HandlerConfiguration implements HandlerConfig
     /**
      * Register's the init parameter under the passed name.
      *
-     * @param string $name Name to register the init parameter with
+     * @param string $name  Name to register the init parameter with
      * @param string $value The value of the init parameter
+     * 
+     * @return void
      */
     public function addInitParameter($name, $value)
     {
@@ -142,6 +155,8 @@ class HandlerConfiguration implements HandlerConfig
      * Return's the init parameter with the passed name.
      *
      * @param string $name Name of the init parameter to return
+     * 
+     * @return string The configuration value
      */
     public function getInitParameter($name)
     {
