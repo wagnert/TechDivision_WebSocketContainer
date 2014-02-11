@@ -8,7 +8,17 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ *
+ * PHP version 5
+ *
+ * @category  Appserver
+ * @package   TechDivision_WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
+
 namespace TechDivision\WebSocketContainer;
 
 use Ratchet\WebSocket\WsServer;
@@ -30,13 +40,14 @@ use Guzzle\Http\Message\RequestInterface;
  * This is a mediator between the Server and the applications provided by
  * the container to handle real-time messaging through a web browser.
  *
- * @package TechDivision\WebSocketContainer
- * @copyright Copyright (c) 2010 <info@techdivision.com> - TechDivision GmbH
- * @license http://opensource.org/licenses/osl-3.0.php
- *          Open Software License (OSL 3.0)
- * @author Tim Wagner <tw@techdivision.com>
- * @link http://ca.php.net/manual/en/ref.http.php
- * @link http://dev.w3.org/html5/websockets/
+ * @category  Appserver
+ * @package   TechDivision_WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
+ * @link      http://ca.php.net/manual/en/ref.http.php
+ * @link      http://dev.w3.org/html5/websockets/
  */
 class RatchetRequest implements MessageComponentInterface
 {
@@ -93,8 +104,8 @@ class RatchetRequest implements MessageComponentInterface
     /**
      * Initialize the web socket server with the container's applications.
      *
-     * @param array $applications
-     *            The initialized applications
+     * @param array $applications The initialized applications
+     *            
      * @return void
      */
     public function __construct($applications)
@@ -115,8 +126,11 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * This method will be invoked when a new client is connected.
      *
+     * @param \Ratchet\ConnectionInterface $conn The connection the error occurs
+     * 
+     * @return void
      * @see \Ratchet\ComponentInterface::onOpen()
      */
     public function onOpen(ConnectionInterface $conn)
@@ -126,8 +140,12 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * This method will be invoked when a error occurs.
      *
+     * @param \Ratchet\ConnectionInterface $from The connection the error occurs
+     * @param string                       $msg  The message to send
+     * 
+     * @return void
      * @see \Ratchet\MessageInterface::onMessage()
      */
     public function onMessage(ConnectionInterface $from, $msg)
@@ -137,7 +155,6 @@ class RatchetRequest implements MessageComponentInterface
         }
 
         if (isset($from->WebSocket->request)) {
-            ;
             $from->WebSocket->request->getBody()->write($msg);
         } else {
 
@@ -187,8 +204,8 @@ class RatchetRequest implements MessageComponentInterface
     /**
      * Locates the web socket handler for the passed request.
      *
-     * @param \Guzzle\Http\Message\RequestInterface $request
-     *            The request to find and return the application instance for
+     * @param \Guzzle\Http\Message\RequestInterface $request The request to find and return the application instance for
+     *            
      * @return \Ratchet\MessageComponentInterface The handler instance
      */
     public function locateHandler(RequestInterface $request)
@@ -199,8 +216,8 @@ class RatchetRequest implements MessageComponentInterface
     /**
      * Tries to find and return the application for the passed request.
      *
-     * @param \Guzzle\Http\Message\RequestInterface $request
-     *            The request to find and return the application instance for
+     * @param \Guzzle\Http\Message\RequestInterface $request The request to find and return the application instance for
+     *            
      * @return \TechDivision\WebSocketContainer\Application The application instance
      * @throws \TechDivision\WebSocketContainer\BadRequestException Is thrown if no application can be found for the passed application name
      */
@@ -233,8 +250,11 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * This method will be invoked when a client connection has been closed.
      *
+     * @param \Ratchet\ConnectionInterface $conn The connection to be closed
+     *
+     * @return void
      * @see \Ratchet\ComponentInterface::onClose()
      */
     public function onClose(ConnectionInterface $conn)
@@ -251,8 +271,12 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * This method will be invoked when a error occurs.
      *
+     * @param \Ratchet\ConnectionInterface $conn The connection the error occurs
+     * @param \Exception                   $e    The exception that occurs
+     * 
+     * @return void
      * @see \Ratchet\ComponentInterface::onError()
      */
     public function onError(ConnectionInterface $conn, \Exception $e)
@@ -271,8 +295,8 @@ class RatchetRequest implements MessageComponentInterface
     /**
      * Disable a specific version of the WebSocket protocol
      *
-     * @param int $versionId
-     *            Version ID to disable
+     * @param int $versionId Version ID to disable
+     * 
      * @return WsServer
      */
     public function disableVersion($versionId)
@@ -282,11 +306,11 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     * Toggle weather to check encoding of incoming messages
+     * Toggle weather to check encoding of incoming messages.
      *
-     * @param
-     *            bool
-     * @return WsServer
+     * @param boolean $opt The flag to enable encoding check
+     * 
+     * @return WsServer The instance itself
      */
     public function setEncodingChecks($opt)
     {
@@ -295,10 +319,11 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     *
-     * @param
-     *            string
-     * @return boolean
+     * Check's if the passed sub protocol is suppored or not.
+     * 
+     * @param string $name The subprotocol to be specified
+     * 
+     * @return boolean TRUE if the sub protocol is supported, else FALSE
      */
     public function isSubProtocolSupported($name)
     {
@@ -316,9 +341,11 @@ class RatchetRequest implements MessageComponentInterface
     }
 
     /**
-     *
-     * @param \Traversable|null $requested
-     * @return string
+     * Returns the sub protocol to be used.
+     *  
+     * @param \Traversable|null $requested The traversable instance
+     * 
+     * @return string The sub protocal string to use
      */
     protected function getSubProtocolString(\Traversable $requested = null)
     {
@@ -340,9 +367,9 @@ class RatchetRequest implements MessageComponentInterface
     /**
      * Close a connection with an HTTP response.
      *
-     * @param \Ratchet\ConnectionInterface $conn
-     * @param int $code
-     *            HTTP status code
+     * @param \Ratchet\ConnectionInterface $conn The connection instance
+     * @param int                          $code HTTP status code
+     * 
      * @return void
      */
     protected function close(ConnectionInterface $conn, $code = 400)

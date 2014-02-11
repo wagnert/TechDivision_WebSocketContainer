@@ -8,6 +8,15 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ *
+ * PHP version 5
+ *
+ * @category  Appserver
+ * @package   TechDivision_WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 namespace TechDivision\WebSocketContainer\Service\Locator;
 
@@ -21,11 +30,12 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 /**
  * The handler resource locator implementation.
  *
- * @package TechDivision\WebSocketContainer
- * @copyright Copyright (c) 2010 <info@techdivision.com> - TechDivision GmbH
- * @license http://opensource.org/licenses/osl-3.0.php
- *          Open Software License (OSL 3.0)
- * @author Tim Wagner <tw@techdivision.com>
+ * @category  Appserver
+ * @package   TechDivision_WebSocketContainer
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://www.appserver.io
  */
 class HandlerLocator implements ResourceLocatorInterface
 {
@@ -47,8 +57,8 @@ class HandlerLocator implements ResourceLocatorInterface
     /**
      * Initializes the locator with the actual handler manager instance.
      *
-     * @param \TechDivision\WebSocketContainer\HandlerManager $handlerManager
-     *            The handler manager instance
+     * @param \TechDivision\WebSocketContainer\HandlerManager $handlerManager The handler manager instance
+     * 
      * @return void
      */
     public function __construct($handlerManager)
@@ -118,8 +128,12 @@ class HandlerLocator implements ResourceLocatorInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns the handler identified by the request URI of
+     * the passed request instance.
      *
+     * @param \Guzzle\Http\Message\RequestInterface $request The request instance
+     * 
+     * @return void
      * @see \TechDivision\WebSocketContainer\Service\Locator\ResourceLocatorInterface::locate()
      */
     public function locate(RequestInterface $request)
@@ -152,7 +166,7 @@ class HandlerLocator implements ResourceLocatorInterface
                 $path = substr($path, 0, strrpos($path, '/'));
             }
             
-        } while (strpos($path, '/') !== FALSE);
+        } while (strpos($path, '/') !== false);
         
         // check at least one handler has been found
         if (is_array($handler) === false || sizeof($handler) === 0) {
